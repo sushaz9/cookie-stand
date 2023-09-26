@@ -5,3 +5,14 @@ body {
   background-size: cover;
   color: bisque;
 }
+
+table,
+th,
+tbody,
+td {
+  border: 1px solid;
+}
+
+td {
+  padding: 8px;
+}
