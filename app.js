@@ -87,6 +87,20 @@ const lima = new Shop("Lima", 2, 16, 4.6);
 // paris.calculateSales()
 // lima.calculateSales()
 
+// //create top row
+// const headerRow = document.createElement("tr");
+// const blankTd = document.createElement {
+// for(let i = 0; i < hours.length; i++)
+// const th = document.createElement("th");
+// th.textContent = hours[i];
+// headerRow.appendChild(th)
+
+// }
+
+// const totalHeading = document.createElement()
+
+// table.appendChild(headerRow)
+
 // render each store on the page
 seattle.render();
 tokyo.render();
