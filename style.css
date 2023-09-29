@@ -14,7 +14,7 @@ header {
   justify-content: center;
 }
 
-h2 {
+h1 {
   font-family: sans-serif;
   color: bisque;
 }
@@ -46,4 +46,8 @@ fieldset {
   background-color: bisque;
   color: black;
   font-family: sans-serif;
+}
+
+form {
+  width: 300px;
 }

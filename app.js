@@ -79,11 +79,13 @@ Shop.prototype.render = function () {
 };
 
 // create our store objects
-const seattle = new Shop("Seattle", 23, 65, 6.3);
-const tokyo = new Shop("Tokyo", 3, 24, 1.2);
-const dubai = new Shop("Dubai", 11, 38, 3.7);
-const paris = new Shop("Paris", 20, 38, 2.3);
-const lima = new Shop("Lima", 2, 16, 4.6);
+const stores = [
+  new Shop("Seattle", 23, 65, 6.3),
+  new Shop("Tokyo", 3, 24, 1.2),
+  new Shop("Dubai", 11, 38, 3.7),
+  new Shop("Paris", 20, 38, 2.3),
+  new Shop("Lima", 2, 16, 4.6),
+];
 
 // calculate sales for each store (commented out because the calculate sales in the render method)
 // seattle.calculateSales()
@@ -112,11 +114,16 @@ headerRow.appendChild(totalHeading);
 table.appendChild(headerRow);
 
 // render each store on the page
-seattle.render();
+
+for (let i = 0; i < stores.length; i++) {
+  stores[i].render();
+}
+
+/*seattle.render();
 tokyo.render();
 dubai.render();
 paris.render();
-lima.render();
+lima.render();*/
 
 const form = document.querySelector("form");
 
@@ -129,10 +136,50 @@ form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   // we are collecting the information from the event object to get the users inputs
-  const username = event.target.username.value;
-  const email = event.target.email.value;
+  const location = event.target.location.value;
+  const min = event.target.minCust.value;
+  const max = event.target.maxCust.value;
+  const avgCookiesPerCust = event.target.avgCookiesPerCust.value;
 
-  // using DOM manipulation to add the response to the page (just so we can see it)
+  const newStore = new CookieStore(
+    location,
+    +minCust,
+    +maxCust,
+    avgCookiesPerCust
+  );
+  newStore.render();
+
+  // create a total row
+  function renderTotalRow() {
+    // make a new tr
+    const tr = document.createElement("tr");
+    // add a "total row" heading
+    const th = document.createElement("th");
+    th.textContent = "Hourly Total";
+    tr.appendChild(th);
+    // add total for each
+
+    table.appendChild(tr);
+
+    renderTotalRow();
+  }
+
+  for (let i = 0; i < hours.length; i++) {
+    console.log("hours", hours[i]);
+    console.log("Seattle"), stores[0].cookiesPerHour[i];
+    let hourlyTotal = 0;
+
+    for (let k = 0; k < stores.length; k++) {
+      hourlyTotal = hourlyTotal + stores[k].cookiesPerHour[i];
+    }
+
+    // add hourly total td to row
+    const td = document.createElementById("td");
+    td.textContent = hourlyTotal;
+    td.appendChild(td);
+  }
+
+  //using DOM manipulation to add the response to the page (just so we can see it)
   const submit = document.getElementById("submit");
   const p = document.createElement("p");
   p.textContent = `${username} with the email ${email} has requested to be contacted.`;
