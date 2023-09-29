@@ -15,15 +15,15 @@ const hours = [
   "7pm",
 ];
 
-// get the table from the HTML so we can add rows
+// this gets table from the HTML so can add rows
 const table = document.getElementById("salesData");
 
-// give a random number between two numbers
+// gives random number between two numbers
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// CookieStore Factory. It makes CookieStore objects
+// 'Shop' makes Shop objects
 function Shop(location, minCust, maxCust, average) {
   this.location = location;
   this.minCust = minCust;
@@ -56,7 +56,7 @@ Shop.prototype.render = function () {
   // create a row
   const tr = document.createElement("tr");
 
-  // add the store name to the row
+  // adds 'this' store location to row
   const th = document.createElement("th");
   th.textContent = this.location;
   tr.appendChild(th);
@@ -78,7 +78,7 @@ Shop.prototype.render = function () {
   table.appendChild(tr);
 };
 
-// create our store objects
+// create store objects
 const stores = [
   new Shop("Seattle", 23, 65, 6.3),
   new Shop("Tokyo", 3, 24, 1.2),
@@ -86,13 +86,6 @@ const stores = [
   new Shop("Paris", 20, 38, 2.3),
   new Shop("Lima", 2, 16, 4.6),
 ];
-
-// calculate sales for each store (commented out because the calculate sales in the render method)
-// seattle.calculateSales()
-// tokyo.calculateSales()
-// dubai.calculateSales()
-// paris.calculateSales()
-// lima.calculateSales()
 
 // //create top row
 const headerRow = document.createElement("tr");
@@ -119,34 +112,25 @@ for (let i = 0; i < stores.length; i++) {
   stores[i].render();
 }
 
-/*seattle.render();
+seattle.render();
 tokyo.render();
 dubai.render();
 paris.render();
-lima.render();*/
-
+lima.render();
 const form = document.querySelector("form");
 
-// we are listening to the submit event of our form
+//  listening to the submit event of our form
 form.addEventListener("submit", function (event) {
-  // the default behaviour of submit is:
-  // - refresh the page
-  // - add information to the url
-  // so here we are preventing that from happening
+  //prevents submit refreshing page and adding info to URL
   event.preventDefault();
 
-  // we are collecting the information from the event object to get the users inputs
+  // collects info from event object to get users input
   const location = event.target.location.value;
   const min = event.target.minCust.value;
   const max = event.target.maxCust.value;
   const avgCookiesPerCust = event.target.avgCookiesPerCust.value;
 
-  const newStore = new CookieStore(
-    location,
-    +minCust,
-    +maxCust,
-    avgCookiesPerCust
-  );
+  const newStore = new Shop(location, +minCust, +maxCust, avgCookiesPerCust);
   newStore.render();
 
   // create a total row
